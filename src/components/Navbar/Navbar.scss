@@ -1,0 +1,38 @@
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+
+  span {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .beta {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 4px 8px;
+
+    position: absolute;
+    top: 8px;
+    right: -64px;
+  }
+}
+
+.left {
+  .pokemon-nav {
+  }
+}
+
+header {
+  // filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+  }
+}

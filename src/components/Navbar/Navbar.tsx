@@ -1,8 +1,8 @@
-import { Moon } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import "./Navbar.scss";
 import { useState } from "react";
 
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 const transition = {
   type: "spring",
@@ -15,16 +15,16 @@ const transition = {
 
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
     <header className="bg-white/40 sticky top-0 z-40 backdrop-blur-lg left-0 right-0 border border-gray-100">
       <div className="container flex h-24 justify-between items-center w-full">
         <div
           className="left h-full flex items-center"
-          onMouseEnter={() => setIsActive(true)}
           onMouseLeave={() => setIsActive(false)}
         >
-          <div className="pokemon-nav">
+          <div className="pokemon-nav" onMouseEnter={() => setIsActive(true)}>
             <img src="/pokeball-nav.svg" alt="" width="30" height="30" />
             <span>Pokémon Data</span>
           </div>
@@ -34,7 +34,7 @@ const Navbar = () => {
               initial={{ opacity: 0, scale: 0.85, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={transition}
-              className="menu left"
+              className="menu left border border-gray-100"
             >
               <ul>
                 <li>
@@ -58,8 +58,21 @@ const Navbar = () => {
         </div>
 
         <div className="right">
-          <div className="nav-item">
-            <Moon />
+          <div
+            className="p-2 rounded-md hover:bg-gray-100 cursor-pointer transition-all duration-100"
+            onClick={() => setIsDarkMode(!isDarkMode)}
+          >
+            {isDarkMode ? (
+              <Moon />
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <Sun />
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

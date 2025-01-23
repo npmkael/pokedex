@@ -1,16 +1,24 @@
+import GameVersion from "../components/GameVersion";
+
 const Pokedex = () => {
   return (
-    <div className="flex h-full">
-      {/* <div className="left-section">
-        <img src="/132.png" alt="" />
-      </div> */}
+    <div className="h-full relative z-10">
+      <section className="title-container text-center mx-auto mt-12 mb-[44px]">
+        <h1 className="text-[48px] font-bold">Pokémon Pokédex</h1>
+        <p className="text-[20px] font-semibold">
+          Information on all the Pokémon creatures from the entire game series.
+        </p>
+      </section>
 
-      {/* <div className="right-section">
-        <div className="divider" />
-        <div className="right-container">
-          <img src="/pokeball-stroke.png" alt="" className="pokeball-stroke" />
+      <section className="mx-[148px]">
+        <div>
+          <GameVersion
+            imgUrl="/all-pokemon.jpg"
+            versionName="All Pokemon"
+            versionLink="/all"
+          />
         </div>
-      </div> */}
+      </section>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 
 import { motion } from "motion/react";
+import Footer from "../components/Footer/Footer";
 
 const MainLayout = () => {
   return (
@@ -10,11 +11,14 @@ const MainLayout = () => {
       <Navbar />
       <Outlet />
 
-      <div className="circle__one" />
-      <div className="circle__red" />
-      <div className="circle__three" />
+      <div className="overflow-hidden">
+        {/* <div className="circle__one" />
+        <div className="circle__red" />
+        <div className="circle__three" />
 
-      <div className="circle__orange" />
+        <div className="circle__orange" /> */}
+      </div>
+      <Footer />
     </motion.div>
   );
 };

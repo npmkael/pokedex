@@ -1,8 +1,9 @@
-import { Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import "./Navbar.scss";
 import { useState } from "react";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, Variants, motion } from "motion/react";
+import { Link } from "react-router-dom";
 
 const transition = {
   type: "spring",
@@ -16,67 +17,119 @@ const transition = {
 const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-white/40 sticky top-0 z-40 backdrop-blur-lg left-0 right-0 border border-gray-100">
-      <div className="container flex h-24 justify-between items-center w-full">
-        <div
-          className="left h-full flex items-center"
-          onMouseLeave={() => setIsActive(false)}
-        >
-          <div className="pokemon-nav" onMouseEnter={() => setIsActive(true)}>
-            <img src="/pokeball-nav.svg" alt="" width="30" height="30" />
-            <span>Pokémon Data</span>
-          </div>
-
-          {isActive && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={transition}
-              className="menu left border border-gray-100"
-            >
-              <ul>
-                <li>
-                  <a href="#">Pokédex</a>
-                </li>
-                <li>Coming Soon!</li>
-                <li>Coming Soon!</li>
-                <li>Coming Soon!</li>
-              </ul>
-            </motion.div>
-          )}
-        </div>
-
-        <div className="logo-container">
-          <div className="flex justify-center items-center gap-[6px]">
-            <img src="/pokeball-icon.png" alt="pokeball" />
-            <span>Wébdex</span>
-          </div>
-
-          {/* <div className="beta">BETA</div> */}
-        </div>
-
-        <div className="right">
+    <>
+      <header className="bg-white/40 sticky top-0 z-40 backdrop-blur-lg left-0 right-0 border border-gray-100">
+        <div className="container flex h-24 justify-between items-center w-full">
           <div
-            className="p-2 rounded-md hover:bg-gray-100 cursor-pointer transition-all duration-100"
-            onClick={() => setIsDarkMode(!isDarkMode)}
+            className="left h-full md:flex items-center hidden"
+            onMouseLeave={() => setIsActive(false)}
           >
-            {isDarkMode ? (
-              <Moon />
-            ) : (
+            <div className="pokemon-nav" onMouseEnter={() => setIsActive(true)}>
+              <img src="/pokeball-nav.svg" alt="" width="30" height="30" />
+              <span>Pokémon Data</span>
+            </div>
+
+            {isActive && (
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.85, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={transition}
+                className="menu left border border-gray-100"
               >
-                <Sun />
+                <ul>
+                  <li>
+                    <Link to="/pokedex">Pokédex</Link>
+                  </li>
+                  <li>Coming Soon!</li>
+                  <li>Coming Soon!</li>
+                  <li>Coming Soon!</li>
+                </ul>
               </motion.div>
             )}
           </div>
+          <div className="logo-container absolute left-0 right-0 mx-auto">
+            <Link
+              to={"/"}
+              className="flex justify-center items-center gap-[6px]"
+            >
+              <img src="/pokeball-icon.png" alt="pokeball" />
+              <span>Wébdex</span>
+            </Link>
+
+            {/* <div className="beta">BETA</div> */}
+          </div>
+
+          {/* NavMobile */}
+          <div className="md:hidden block">
+            <div
+              className="p-2 rounded-md hover:bg-gray-200/50 cursor-pointer transition-all duration-100"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <Menu />
+            </div>
+          </div>
+
+          <div className="right md:block hidden">
+            <div
+              className="p-2 rounded-md hover:bg-gray-200/50 cursor-pointer transition-all duration-100"
+              onClick={() => setIsDarkMode(!isDarkMode)}
+            >
+              {isDarkMode ? (
+                <Moon />
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <Sun />
+                </motion.div>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              className="absolute left-0  h-[300px] bottom-0 right-0 bg-white z-[100] p-8 shadow-sm rounded-tr-xl rounded-tl-xl"
+              initial={{ y: 300 }}
+              animate={{ y: 0 }}
+              exit={{ y: 300 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="flex flex-col gap-4">
+                <X
+                  className="cursor-pointer "
+                  onClick={() => setIsOpen(false)}
+                />
+                <div className="links">
+                  <Link
+                    className="font-bold text-xl"
+                    to={"/pokedex"}
+                    onClick={() => setIsOpen((prev) => !prev)}
+                  >
+                    Pokédex
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              className="absolute backdrop-blur-md top-0 bottom-0 left-0 right-0 bg-white/10 z-50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsOpen(false)}
+            />
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

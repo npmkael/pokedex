@@ -2,9 +2,11 @@ import React from "react";
 import Navbar from "../components/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 
+import { motion } from "motion/react";
+
 const MainLayout = () => {
   return (
-    <main className="main-container">
+    <motion.div className="main-container relative">
       <Navbar />
       <Outlet />
 
@@ -13,7 +15,7 @@ const MainLayout = () => {
       <div className="circle__three" />
 
       <div className="circle__orange" />
-    </main>
+    </motion.div>
   );
 };
 

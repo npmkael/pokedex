@@ -1,4 +1,4 @@
-import React, { useState, version } from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ type GameVersionProps = {
   versionName: string;
   versionLink: string;
   regionName?: string;
+  key: string;
 };
 
 const GameVersion = ({
@@ -17,6 +18,7 @@ const GameVersion = ({
   versionName,
   versionLink,
   regionName,
+  key,
 }: GameVersionProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -26,6 +28,7 @@ const GameVersion = ({
       to={`/pokedex/${versionLink}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      key={versionLink}
     >
       <img
         src={imgUrl}
@@ -33,7 +36,7 @@ const GameVersion = ({
         className="object-cover w-[350px] h-[220px] rounded-lg"
       />
       <div className="flex flex-col mt-[12px]">
-        <div className="font-bold text-[20px] flex gap-2 items-center">
+        <div className="font-bold text-[17px] flex gap-2 items-center">
           {versionName}
 
           <span>
@@ -50,7 +53,11 @@ const GameVersion = ({
             </AnimatePresence>
           </span>
         </div>
-        {regionName ? <span>{regionName}</span> : <span>Master List</span>}
+        {regionName ? (
+          <span className="text-[14px]">{`${regionName} Region`}</span>
+        ) : (
+          <span className="text-[14px]">Master List</span>
+        )}
       </div>
     </Link>
   );

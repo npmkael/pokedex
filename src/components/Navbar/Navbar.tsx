@@ -1,6 +1,6 @@
 import { Menu, Moon, Sun, X } from "lucide-react";
 import "./Navbar.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { AnimatePresence, Variants, motion } from "motion/react";
 import { Link } from "react-router-dom";
@@ -19,9 +19,18 @@ const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (isOpen)
+      document.querySelector("body")?.style.setProperty("overflow", "hidden");
+
+    return () => {
+      document.querySelector("body")?.style.removeProperty("overflow");
+    };
+  }, [isOpen]);
+
   return (
     <>
-      <header className="bg-white/40 sticky top-0 z-40 backdrop-blur-lg left-0 right-0 border border-gray-100">
+      <header className="bg-white/40 sticky top-0 z-40 backdrop-blur-lg left-0 right-0">
         <div className="container flex h-24 justify-between items-center w-full">
           <div
             className="left h-full md:flex items-center hidden"
@@ -96,7 +105,7 @@ const Navbar = () => {
         {isOpen && (
           <>
             <motion.div
-              className="absolute left-0  h-[300px] bottom-0 right-0 bg-white z-[100] p-8 shadow-sm rounded-tr-xl rounded-tl-xl"
+              className="fixed left-0 bottom-0 right-0 h-[300px] bg-white z-[100] p-8 shadow-sm rounded-tr-xl rounded-tl-xl"
               initial={{ y: 300 }}
               animate={{ y: 0 }}
               exit={{ y: 300 }}

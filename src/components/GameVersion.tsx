@@ -23,43 +23,51 @@ const GameVersion = ({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link
-      className="flex flex-col max-w-[400px] max-h-[265] leading-[18px]"
-      to={`/pokedex/${versionLink}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      key={versionLink}
+    <motion.div
+      variants={{
+        initial: { opacity: 0, y: 20, filter: "blur(3px)" },
+        animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+      }}
+      transition={{ duration: 0.5 }}
     >
-      <img
-        src={imgUrl}
-        alt={versionName}
-        className="object-cover w-[350px] h-[220px] rounded-lg"
-      />
-      <div className="flex flex-col mt-[12px]">
-        <div className="font-bold text-[17px] flex gap-2 items-center">
-          {versionName}
+      <Link
+        className="flex flex-col max-w-[400px] max-h-[265] leading-[18px]"
+        to={`/pokedex/${versionLink}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        key={versionLink}
+      >
+        <img
+          src={imgUrl}
+          alt={versionName}
+          className="object-cover w-[350px] h-[220px] rounded-lg"
+        />
+        <div className="flex flex-col mt-[12px]">
+          <div className="font-bold text-[17px] flex gap-2 items-center">
+            {versionName}
 
-          <span>
-            <AnimatePresence>
-              {isHovered && (
-                <motion.div
-                  initial={{ x: 0, opacity: 0 }}
-                  animate={{ x: 3, opacity: 1 }}
-                  exit={{ x: 0, opacity: 0 }}
-                >
-                  <ChevronRight size={18} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </span>
+            <span>
+              <AnimatePresence>
+                {isHovered && (
+                  <motion.div
+                    initial={{ x: 0, opacity: 0 }}
+                    animate={{ x: 3, opacity: 1 }}
+                    exit={{ x: 0, opacity: 0 }}
+                  >
+                    <ChevronRight size={18} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </span>
+          </div>
+          {regionName ? (
+            <span className="text-[14px]">{`${regionName} Region`}</span>
+          ) : (
+            <span className="text-[14px]">Master List</span>
+          )}
         </div>
-        {regionName ? (
-          <span className="text-[14px]">{`${regionName} Region`}</span>
-        ) : (
-          <span className="text-[14px]">Master List</span>
-        )}
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 };
 

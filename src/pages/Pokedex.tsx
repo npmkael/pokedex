@@ -1,5 +1,6 @@
 import GameVersion from "../components/GameVersion";
 import { pokemonGenerations } from "../constants/data";
+import { motion } from "motion/react";
 
 const Pokedex = () => {
   return (
@@ -11,8 +12,13 @@ const Pokedex = () => {
         </p>
       </section>
 
-      <section className="mx-[148px] mb-8">
-        <div className="grid lg:grid-cols-[350px_350px_350px] md:grid-cols-[350px_350px] sm:grid-cols-[300px_300px] grid-cols-[350px] gap-6 justify-center">
+      <section className="mx-[148px] mb-16">
+        <motion.div
+          className="grid lg:grid-cols-[350px_350px_350px] md:grid-cols-[350px_350px] sm:grid-cols-[300px_300px] grid-cols-[350px] gap-6 justify-center"
+          initial="initial"
+          animate="animate"
+          transition={{ staggerChildren: 0.1 }}
+        >
           {pokemonGenerations.map((generation) => (
             <GameVersion
               key={generation.versionLink}
@@ -22,7 +28,7 @@ const Pokedex = () => {
               regionName={generation.regionName}
             />
           ))}
-        </div>
+        </motion.div>
       </section>
     </div>
   );

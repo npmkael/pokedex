@@ -12,7 +12,7 @@ const Pokedex = () => {
       </section>
 
       <section className="mx-[148px] mb-8">
-        <div className="grid grid-cols-[350px_350px_350px] gap-6 justify-center">
+        <div className="grid lg:grid-cols-[350px_350px_350px] md:grid-cols-[350px_350px] sm:grid-cols-[300px_300px] grid-cols-[350px] gap-6 justify-center">
           {pokemonGenerations.map((generation) => (
             <GameVersion
               key={generation.versionLink}

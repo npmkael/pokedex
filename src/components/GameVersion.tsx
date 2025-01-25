@@ -24,7 +24,7 @@ const GameVersion = ({
 
   return (
     <Link
-      className="flex flex-col max-w-[350px] max-h-[265] leading-[18px]"
+      className="flex flex-col max-w-[400px] max-h-[265] leading-[18px]"
       to={`/pokedex/${versionLink}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

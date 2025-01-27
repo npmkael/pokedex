@@ -31,7 +31,7 @@ const GameVersion = ({
       transition={{ duration: 0.5 }}
     >
       <Link
-        className="flex flex-col max-w-[400px] max-h-[265] leading-[18px]"
+        className="flex flex-col sm:max-w-[400px] max-h-[265] leading-[18px]"
         to={`/pokedex/${versionLink}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -40,7 +40,7 @@ const GameVersion = ({
         <img
           src={imgUrl}
           alt={versionName}
-          className="object-cover w-[350px] h-[220px] rounded-lg"
+          className="object-cover sm:w-[350px] w-full h-[220px] rounded-lg"
         />
         <div className="flex flex-col mt-[12px]">
           <div className="font-bold text-[17px] flex gap-2 items-center">

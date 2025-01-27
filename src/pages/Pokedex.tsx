@@ -6,13 +6,15 @@ const Pokedex = () => {
   return (
     <div className="relative z-10">
       <section className="title-container text-center mx-auto mt-12 mb-[44px]">
-        <h1 className="text-[48px] font-bold">Pokémon Pokédex</h1>
-        <p className="text-[20px] font-semibold">
+        <h1 className="sm:text-[48px] text-[36px] font-bold">
+          Pokémon Pokédex
+        </h1>
+        <p className="sm:text-[20px] text-[16px] font-semibold">
           Information on all the Pokémon creatures from the entire game series.
         </p>
       </section>
 
-      <section className="mx-[148px] mb-16">
+      <section className="mb-16">
         <motion.div
           className="grid lg:grid-cols-[350px_350px_350px] md:grid-cols-[350px_350px] sm:grid-cols-[300px_300px] grid-cols-[350px] gap-6 justify-center"
           initial="initial"

@@ -86,17 +86,29 @@ const Navbar = () => {
               className="p-2 rounded-md hover:bg-gray-200/50 cursor-pointer transition-all duration-100"
               onClick={() => setIsDarkMode(!isDarkMode)}
             >
-              {isDarkMode ? (
-                <Moon />
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <Sun />
-                </motion.div>
-              )}
+              <AnimatePresence mode="wait">
+                {isDarkMode ? (
+                  <motion.div
+                    key="moon"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Moon />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="sun"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Sun />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>

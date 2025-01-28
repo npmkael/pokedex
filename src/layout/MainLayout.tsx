@@ -7,7 +7,7 @@ import Footer from "../components/Footer/Footer";
 
 const MainLayout = () => {
   return (
-    <motion.div className="main-container relative">
+    <motion.div className="main-container relative dark:bg-[#09090B]">
       <Navbar />
       <Outlet />
 

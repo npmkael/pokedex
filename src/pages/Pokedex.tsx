@@ -6,10 +6,10 @@ const Pokedex = () => {
   return (
     <div className="relative z-10">
       <section className="title-container text-center mx-auto mt-12 mb-[44px]">
-        <h1 className="sm:text-[48px] text-[36px] font-bold">
+        <h1 className="sm:text-[48px] text-[36px] font-bold dark:text-[#FAFAFA]">
           Pokémon Pokédex
         </h1>
-        <p className="sm:text-[20px] text-[16px] font-semibold">
+        <p className="sm:text-[20px] text-[16px] font-semibold dark:text-[#FAFAFA]">
           Information on all the Pokémon creatures from the entire game series.
         </p>
       </section>

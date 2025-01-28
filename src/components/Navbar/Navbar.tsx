@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { AnimatePresence, Variants, motion } from "motion/react";
 import { Link } from "react-router-dom";
+import { RainbowButton } from "../Buttons/RainbowButton";
 
 const transition = {
   type: "spring",
@@ -19,6 +20,11 @@ const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  const themeToggle = () => {
+    setIsDarkMode(!isDarkMode);
+    document.body.classList.toggle("dark");
+  };
+
   useEffect(() => {
     if (isOpen)
       document.querySelector("body")?.style.setProperty("overflow", "hidden");
@@ -30,15 +36,21 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="bg-white/40 sticky top-0 z-40 backdrop-blur-lg left-0 right-0">
+      <header className="bg-white/40 sticky top-0 z-40 backdrop-blur-lg left-0 right-0 dark:bg-[#09090B]/80">
         <div className="container flex h-24 justify-between items-center w-full">
           <div
             className="left h-full md:flex items-center hidden"
             onMouseLeave={() => setIsActive(false)}
           >
             <div className="pokemon-nav" onMouseEnter={() => setIsActive(true)}>
-              <img src="/pokeball-nav.svg" alt="" width="30" height="30" />
-              <span>Pokémon Data</span>
+              <img
+                src="/pokeball-nav.svg"
+                alt=""
+                width="30"
+                height="30"
+                className="dark:invert"
+              />
+              <span className="dark:text-white">Pokémon Data</span>
             </div>
 
             {isActive && (
@@ -46,15 +58,18 @@ const Navbar = () => {
                 initial={{ opacity: 0, scale: 0.85, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={transition}
-                className="menu left border border-gray-100"
+                className="menu left border border-gray-100 dark:bg-[#09090B] dark:border-gray-800/50"
               >
+                {/* should map over the links: constants->data.ts */}
                 <ul>
                   <li>
-                    <Link to="/pokedex">Pokédex</Link>
+                    <Link to="/pokedex" className="dark:text-[#FAFAFA]">
+                      Pokédex
+                    </Link>
                   </li>
-                  <li>Coming Soon!</li>
-                  <li>Coming Soon!</li>
-                  <li>Coming Soon!</li>
+                  <li className="dark:text-[#FAFAFA]">Coming Soon!</li>
+                  <li className="dark:text-[#FAFAFA]">Coming Soon!</li>
+                  <li className="dark:text-[#FAFAFA]">Coming Soon!</li>
                 </ul>
               </motion.div>
             )}
@@ -65,7 +80,7 @@ const Navbar = () => {
               className="flex justify-center items-center gap-[6px]"
             >
               <img src="/pokeball-icon.png" alt="pokeball" />
-              <span>Wébdex</span>
+              <span className="dark:text-white">Wébdex</span>
             </Link>
 
             {/* <div className="beta">BETA</div> */}
@@ -81,10 +96,15 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="right md:block hidden">
+          <div className="right md:flex hidden items-center gap-3">
+            <div>
+              <RainbowButton className="dark:text-black text-white">
+                Github
+              </RainbowButton>
+            </div>
             <div
-              className="p-2 rounded-md hover:bg-gray-200/50 cursor-pointer transition-all duration-100"
-              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="p-2 rounded-md hover:bg-gray-200/50 dark:hover:bg-gray-100/10 cursor-pointer transition-all duration-100"
+              onClick={themeToggle}
             >
               <AnimatePresence mode="wait">
                 {isDarkMode ? (
@@ -95,7 +115,7 @@ const Navbar = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Moon />
+                    <Moon className="dark:text-white" />
                   </motion.div>
                 ) : (
                   <motion.div

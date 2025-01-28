@@ -43,7 +43,7 @@ const GameVersion = ({
           className="object-cover sm:w-[350px] w-full h-[220px] rounded-lg"
         />
         <div className="flex flex-col mt-[12px]">
-          <div className="font-bold text-[17px] flex gap-2 items-center">
+          <div className="font-bold text-[17px] flex gap-2 items-center dark:text-[#FAFAFA]">
             {versionName}
 
             <span>
@@ -54,16 +54,16 @@ const GameVersion = ({
                     animate={{ x: 3, opacity: 1 }}
                     exit={{ x: 0, opacity: 0 }}
                   >
-                    <ChevronRight size={18} />
+                    <ChevronRight size={18} className="dark:text-[#FAFAFA]" />
                   </motion.div>
                 )}
               </AnimatePresence>
             </span>
           </div>
           {regionName ? (
-            <span className="text-[14px]">{`${regionName} Region`}</span>
+            <span className="text-[14px] dark:text-[#FAFAFA]">{`${regionName} Region`}</span>
           ) : (
-            <span className="text-[14px]">Master List</span>
+            <span className="text-[14px] dark:text-[#FAFAFA]">Master List</span>
           )}
         </div>
       </Link>

@@ -16,6 +16,30 @@ body {
   // overflow: hidden;
 }
 
+@layer utilities {
+  body::-webkit-scrollbar {
+    width: 8px;
+    background-color: #ffffff;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: rgb(197, 197, 197);
+  }
+
+  /* Dark mode styles */
+  .dark body::-webkit-scrollbar {
+    background-color: #1a1a1d; /* Darker background for dark mode */
+  }
+
+  .dark body::-webkit-scrollbar-thumb {
+    background-color: #555555; /* Lighter thumb for dark mode */
+  }
+
+  .dark body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.1); /* Subtle white shadow */
+  }
+}
+
 .main-container {
   position: relative;
   // height: 100vh;

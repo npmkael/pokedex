@@ -23,6 +23,7 @@ const Navbar = () => {
   const themeToggle = () => {
     setIsDarkMode(!isDarkMode);
     document.body.classList.toggle("dark");
+    document.documentElement.classList.toggle("dark");
   };
 
   useEffect(() => {
@@ -141,7 +142,7 @@ const Navbar = () => {
               initial={{ y: 300 }}
               animate={{ y: 0 }}
               exit={{ y: 300 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
             >
               <div className="flex flex-col gap-4">
                 <X

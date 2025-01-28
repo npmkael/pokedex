@@ -90,10 +90,10 @@ const Navbar = () => {
           {/* NavMobile */}
           <div className="md:hidden block">
             <div
-              className="p-2 rounded-md hover:bg-gray-200/50 cursor-pointer transition-all duration-100"
+              className="p-2 rounded-md hover:bg-gray-200/50 cursor-pointer transition-all duration-100 dark:hover:bg-gray-100/10"
               onClick={() => setIsOpen(!isOpen)}
             >
-              <Menu />
+              <Menu className="dark:text-white" />
             </div>
           </div>
 

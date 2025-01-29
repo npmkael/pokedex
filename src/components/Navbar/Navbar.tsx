@@ -124,7 +124,7 @@ const Navbar = () => {
               onClick={themeToggle}
             >
               <AnimatePresence mode="wait">
-                {isDarkMode ? (
+                {!isDarkMode ? (
                   <motion.div
                     key="moon"
                     initial={{ opacity: 0 }}

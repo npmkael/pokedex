@@ -1,4 +1,4 @@
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Github, Menu, Moon, Star, Sun, X } from "lucide-react";
 import "./Navbar.scss";
 import { useState, useEffect } from "react";
 
@@ -19,6 +19,7 @@ const Navbar = () => {
   const [isActive, setIsActive] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const themeToggle = () => {
     setIsDarkMode(!isDarkMode);
@@ -98,9 +99,24 @@ const Navbar = () => {
           </div>
 
           <div className="right md:flex hidden items-center gap-3">
-            <div>
-              <RainbowButton className="dark:text-black text-white">
-                Github
+            <div className="">
+              <RainbowButton
+                className="dark:text-black text-white flex items-center gap-[12px]"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                <span className="flex items-center gap-[4px]">
+                  <Github size={18} /> Github
+                </span>
+                <span className="flex items-center gap-2">
+                  <Star
+                    fill={`${isHovered ? "#FCDE70" : "gray"}`}
+                    stroke={`${isHovered ? "#FCDE70" : "gray"}`}
+                    className="transition-all"
+                    size={18}
+                  />
+                  0
+                </span>
               </RainbowButton>
             </div>
             <div
@@ -116,7 +132,7 @@ const Navbar = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Moon className="dark:text-white" />
+                    <Moon />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -126,7 +142,7 @@ const Navbar = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Sun />
+                    <Sun className="dark:text-white" />
                   </motion.div>
                 )}
               </AnimatePresence>

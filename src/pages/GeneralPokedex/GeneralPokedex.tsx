@@ -41,7 +41,7 @@ const GeneralPokedex = () => {
             <th>HP</th>
             <th>Total</th>
           </tr>
-          <tr>
+          <tr className="border-b border-gray-100">
             <td>
               <span className="flex items-center gap-2">
                 <img src="/bulba-sprite.png" alt="" />
@@ -49,7 +49,7 @@ const GeneralPokedex = () => {
               </span>
             </td>
             <td>Bulbasaur</td>
-            <td className="flex flex-col gap-2 py-4">
+            <td className="flex flex-col gap-2 py-1.5">
               <PokemonType />
               <PokemonType />
             </td>

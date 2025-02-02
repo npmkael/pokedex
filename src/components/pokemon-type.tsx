@@ -1,18 +1,18 @@
 import { Leaf } from "lucide-react";
 import React from "react";
 
+type PokemonTypeProps = {
+  type: string;
+};
+
 const PokemonType = () => {
+  const checkType = (type: string) => {};
+
   return (
-    <div className="w-[110px] bg-[#455547] rounded-md flex gap-2 items-center">
-      <div
-        className="bg-[#63BB5A] w-[40px] h-[35px] rounded-tl-md rounded-bl-md flex items-center  pl-1.5"
-        style={{
-          clipPath: "polygon(0 0, 100% 0, 70% 100%, 0% 100%)",
-        }}
-      >
-        <Leaf className="text-white" size={22} />
-      </div>
-      <span className="font-overpass font-bold text-white text-xl">GRASS</span>
+    <div className="w-[110px] bg-[#7C5] rounded-md flex gap-2 items-center justify-center">
+      <span className="font-bold text-white text-xl flex items-center">
+        GRASS
+      </span>
     </div>
   );
 };

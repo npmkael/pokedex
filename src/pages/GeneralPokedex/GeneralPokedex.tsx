@@ -50,8 +50,8 @@ const GeneralPokedex = () => {
             </td>
             <td>Bulbasaur</td>
             <td className="flex flex-col gap-2 py-1.5">
-              <PokemonType />
-              <PokemonType />
+              <PokemonType type="grass" />
+              <PokemonType type="poison" />
             </td>
             <td>45</td>
             <td>65</td>

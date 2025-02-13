@@ -3,8 +3,63 @@ import Title from "../../components/Title";
 
 import "../../styles/components/search.scss";
 import PokemonType from "../../components/pokemon-type";
+import { useState, useEffect } from "react";
 
 const GeneralPokedex = () => {
+  const [pokemonList, setPokemonList] = useState();
+  const [pokemonDetails, setPokemonDetails] = useState();
+  const [isLoading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const fetchPokemons = async () => {
+      try {
+        const response = await fetch(
+          "https://pokeapi.co/api/v2/pokemon?limit=10"
+        );
+
+        if (!response.ok) {
+          console.log("Error here 1st fetch");
+          throw new Error("Network response was not ok");
+        }
+
+        const result = await response.json();
+        setPokemonList(result.results);
+
+        const detailsPromises = result.results.map(async (pokemon) => {
+          const detailsResponse = await fetch(pokemon.url);
+
+          if (!detailsResponse.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          return detailsResponse.json();
+        });
+
+        const detailsResults = await Promise.all(detailsPromises);
+        setPokemonDetails(detailsResults);
+      } catch (error) {
+        setError(error as Error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPokemons();
+  }, []);
+
+  // add pokeball loading animation (soon)
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  // add error design (soon)
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  console.log(pokemonList);
+
   return (
     <div>
       <Title
@@ -29,40 +84,45 @@ const GeneralPokedex = () => {
       {/* Main container */}
       <div className="bg-white w-[80%] mx-auto p-6 border border-gray-100 shadow-con mb-4 shadow-drop-1">
         <table className="w-full text-left">
-          <tr className="bg-[#F6F6F6]">
+          <tr className="bg-[rgb(246,246,246)]">
             <th className="p-4">#</th>
             <th>Name</th>
             <th>Type</th>
-            <th>Speed</th>
-            <th>Sp. Def</th>
-            <th>Sp. Atk</th>
-            <th>Defense</th>
-            <th>Attack</th>
             <th>HP</th>
+            <th>Attack</th>
+            <th>Defense</th>
+            <th>Sp. Atk</th>
+            <th>Sp. Def</th>
+            <th>Speed</th>
             <th>Total</th>
           </tr>
-          <tr className="border-b border-gray-100">
-            <td>
-              <span className="flex items-center gap-2">
-                <img src="/bulba-sprite.png" alt="" />
-                No. 0001
-              </span>
-            </td>
-            <td>Bulbasaur</td>
-            <td className="flex flex-col gap-2 py-1.5">
-              <PokemonType type="grass" />
-              <PokemonType type="poison" />
-            </td>
-            <td>45</td>
-            <td>65</td>
-            <td>65</td>
-            <td>49</td>
-            <td>49</td>
-            <td>45</td>
-            <td>
-              <span className="font-bold">318</span>
-            </td>
-          </tr>
+          {pokemonDetails.map((poke) => (
+            <tr className="border-b border-gray-100">
+              <td>
+                <span className="flex items-center gap-2">
+                  <img
+                    src={`https://img.pokemondb.net/sprites/scarlet-violet/icon/${poke.name}.png`}
+                    alt=""
+                    width={60}
+                    height={56}
+                  />
+                  No. {poke.id}
+                </span>
+              </td>
+              <td>{poke.name}</td>
+              <td className="flex flex-col gap-2 py-1.5">
+                {poke.types.map((type) => (
+                  <PokemonType type={type.type.name} />
+                ))}
+              </td>
+              {poke.stats.map((stat) => (
+                <td>{stat.base_stat}</td>
+              ))}
+              <td>
+                <span className="font-bold">{}</span>
+              </td>
+            </tr>
+          ))}
         </table>
       </div>
     </div>

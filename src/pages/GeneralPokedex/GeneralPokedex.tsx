@@ -15,7 +15,7 @@ const GeneralPokedex = () => {
     const fetchPokemons = async () => {
       try {
         const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=10"
+          "https://pokeapi.co/api/v2/pokemon?limit=20"
         );
 
         if (!response.ok) {
@@ -57,8 +57,6 @@ const GeneralPokedex = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-  console.log(pokemonList);
 
   return (
     <div>
@@ -109,17 +107,26 @@ const GeneralPokedex = () => {
                   No. {poke.id}
                 </span>
               </td>
-              <td>{poke.name}</td>
-              <td className="flex flex-col gap-2 py-1.5">
+              <td>
+                <span className="font-bold">
+                  {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
+                </span>
+              </td>
+              <td>
                 {poke.types.map((type) => (
-                  <PokemonType type={type.type.name} />
+                  <>
+                    <PokemonType type={type.type.name} />
+                    <br></br>
+                  </>
                 ))}
               </td>
               {poke.stats.map((stat) => (
                 <td>{stat.base_stat}</td>
               ))}
               <td>
-                <span className="font-bold">{}</span>
+                <span className="font-bold">
+                  {poke.stats.reduce((acc, currentValue) => acc + currentValue)}
+                </span>
               </td>
             </tr>
           ))}

@@ -125,7 +125,9 @@ const GeneralPokedex = () => {
               ))}
               <td>
                 <span className="font-bold">
-                  {poke.stats.reduce((acc, currentValue) => acc + currentValue)}
+                  {poke.stats.reduce((acc, currentValue) => {
+                    return acc + currentValue.base_stat;
+                  }, 0)}
                 </span>
               </td>
             </tr>

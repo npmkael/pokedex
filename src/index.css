@@ -16,6 +16,14 @@ td {
   border-color: #dbdbdb;
 }
 
+tbody tr {
+  transition: 0.3s;
+}
+
+tbody tr:hover {
+  background-color: #f3f3f3;
+}
+
 .type-grass {
   background-color: #7c5;
 }

@@ -82,56 +82,60 @@ const GeneralPokedex = () => {
       {/* Main container */}
       <div className="bg-white w-[80%] mx-auto p-6 border border-gray-100 shadow-con mb-4 shadow-drop-1">
         <table className="w-full text-left">
-          <tr className="bg-[rgb(246,246,246)]">
-            <th className="p-4">#</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>HP</th>
-            <th>Attack</th>
-            <th>Defense</th>
-            <th>Sp. Atk</th>
-            <th>Sp. Def</th>
-            <th>Speed</th>
-            <th>Total</th>
-          </tr>
-          {pokemonDetails.map((poke) => (
-            <tr className="border-b border-gray-100">
-              <td>
-                <span className="flex items-center gap-2">
-                  <img
-                    src={`https://img.pokemondb.net/sprites/scarlet-violet/icon/${poke.name}.png`}
-                    alt=""
-                    width={60}
-                    height={56}
-                  />
-                  No. {poke.id}
-                </span>
-              </td>
-              <td>
-                <span className="font-bold">
-                  {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
-                </span>
-              </td>
-              <td>
-                {poke.types.map((type) => (
-                  <>
-                    <PokemonType type={type.type.name} />
-                    <br></br>
-                  </>
-                ))}
-              </td>
-              {poke.stats.map((stat) => (
-                <td>{stat.base_stat}</td>
-              ))}
-              <td>
-                <span className="font-bold">
-                  {poke.stats.reduce((acc, currentValue) => {
-                    return acc + currentValue.base_stat;
-                  }, 0)}
-                </span>
-              </td>
+          <thead>
+            <tr className="bg-[rgb(246,246,246)]">
+              <th className="p-4">#</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>HP</th>
+              <th>Attack</th>
+              <th>Defense</th>
+              <th>Sp. Atk</th>
+              <th>Sp. Def</th>
+              <th>Speed</th>
+              <th>Total</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {pokemonDetails.map((poke) => (
+              <tr className="border-b border-gray-100">
+                <td>
+                  <span className="flex items-center gap-2">
+                    <img
+                      src={`https://img.pokemondb.net/sprites/scarlet-violet/icon/${poke.name}.png`}
+                      alt=""
+                      width={60}
+                      height={56}
+                    />
+                    No. {poke.id}
+                  </span>
+                </td>
+                <td>
+                  <span className="font-bold">
+                    {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
+                  </span>
+                </td>
+                <td>
+                  {poke.types.map((type) => (
+                    <>
+                      <PokemonType type={type.type.name} />
+                      <br></br>
+                    </>
+                  ))}
+                </td>
+                {poke.stats.map((stat) => (
+                  <td>{stat.base_stat}</td>
+                ))}
+                <td>
+                  <span className="font-bold">
+                    {poke.stats.reduce((acc, currentValue) => {
+                      return acc + currentValue.base_stat;
+                    }, 0)}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

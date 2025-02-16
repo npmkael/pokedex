@@ -65,7 +65,7 @@ const GeneralPokemonTable = ({ query }: Props) => {
     } else {
       setFilteredPokemon([]);
     }
-  }, [query, filteredPokemon]);
+  }, [query, pokemonDetails]);
 
   // add pokeball loading animation (soon)
   if (isLoading) {
@@ -81,7 +81,9 @@ const GeneralPokemonTable = ({ query }: Props) => {
     <table className="w-full text-left">
       <thead>
         <tr className="bg-[rgb(246,246,246)]">
-          <th className="p-4">#</th>
+          <th>
+            <span>#</span>
+          </th>
           <th>Name</th>
           <th>Type</th>
           <th>HP</th>
@@ -147,7 +149,10 @@ const GeneralPokemonTable = ({ query }: Props) => {
                   </span>
                 </td>
                 <td>
-                  <Link to={`/pokedex/${poke.name}`} className="font-bold">
+                  <Link
+                    to={`/pokedex/${poke.name}`}
+                    className="font-bold hover:underline"
+                  >
                     {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
                   </Link>
                 </td>

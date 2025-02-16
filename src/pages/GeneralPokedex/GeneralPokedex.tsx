@@ -1,9 +1,12 @@
 import { Search } from "lucide-react";
 import Title from "../../components/Title";
-import "../../styles/components/search.scss";
 import GeneralPokemonTable from "./GeneralPokemonTable";
 
+import { useState } from "react";
+
 const GeneralPokedex = () => {
+  const [query, setSearchQuery] = useState("");
+
   return (
     <div>
       <Title
@@ -21,13 +24,15 @@ const GeneralPokedex = () => {
             className="w-full outline-none px-2 py-1"
             type="text"
             placeholder="Search..."
+            value={query}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
       </div>
 
       {/* Main container */}
       <div className="bg-white w-[80%] mx-auto p-6 border border-gray-100 shadow-con mb-4 shadow-drop-1">
-        <GeneralPokemonTable />
+        <GeneralPokemonTable query={query} />
       </div>
     </div>
   );

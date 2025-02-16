@@ -4,10 +4,17 @@ import PokemonType from "../../components/pokemon-type";
 import { Link } from "react-router-dom";
 import { Result, PokeAPIResponse } from "../../types/api";
 
-const GeneralPokemonTable = () => {
+type Props = {
+  query: string;
+};
+
+const GeneralPokemonTable = ({ query }: Props) => {
   const [pokemonDetails, setPokemonDetails] = useState<
     PokeAPIResponse[] | null
   >(null);
+  const [filteredPokemon, setFilteredPokemon] = useState<
+    PokeAPIResponse[] | undefined
+  >();
   const [isLoading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -49,6 +56,17 @@ const GeneralPokemonTable = () => {
     fetchPokemons();
   }, []);
 
+  useEffect(() => {
+    if (query) {
+      const filtered = pokemonDetails?.filter((poke: PokeAPIResponse) =>
+        poke.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredPokemon(filtered);
+    } else {
+      setFilteredPokemon([]);
+    }
+  }, [query, filteredPokemon]);
+
   // add pokeball loading animation (soon)
   if (isLoading) {
     return <div>Loading...</div>;
@@ -76,44 +94,83 @@ const GeneralPokemonTable = () => {
         </tr>
       </thead>
       <tbody>
-        {pokemonDetails?.map((poke) => (
-          <tr className="border-b border-gray-100">
-            <td>
-              <span className="flex items-center gap-2">
-                <img
-                  src={`https://img.pokemondb.net/sprites/scarlet-violet/icon/${poke.name}.png`}
-                  alt=""
-                  width={60}
-                  height={56}
-                />
-                No. {poke.id}
-              </span>
-            </td>
-            <td>
-              <Link to={`/pokedex/${poke.name}`} className="font-bold">
-                {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
-              </Link>
-            </td>
-            <td>
-              {poke.types.map((type) => (
-                <>
-                  <PokemonType type={type.type.name} />
-                  <br></br>
-                </>
-              ))}
-            </td>
-            {poke.stats.map((stat) => (
-              <td>{stat.base_stat}</td>
+        {query.length > 0
+          ? filteredPokemon?.map((poke) => (
+              <tr className="border-b border-gray-100">
+                <td>
+                  <span className="flex items-center gap-2">
+                    <img
+                      src={`https://img.pokemondb.net/sprites/scarlet-violet/icon/${poke.name}.png`}
+                      alt=""
+                      width={60}
+                      height={56}
+                    />
+                    No. {poke.id}
+                  </span>
+                </td>
+                <td>
+                  <Link to={`/pokedex/${poke.name}`} className="font-bold">
+                    {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
+                  </Link>
+                </td>
+                <td>
+                  {poke.types.map((type) => (
+                    <>
+                      <PokemonType type={type.type.name} />
+                      <br></br>
+                    </>
+                  ))}
+                </td>
+                {poke.stats.map((stat) => (
+                  <td>{stat.base_stat}</td>
+                ))}
+                <td>
+                  <span className="font-bold">
+                    {poke.stats.reduce((acc, currentValue) => {
+                      return acc + currentValue.base_stat;
+                    }, 0)}
+                  </span>
+                </td>
+              </tr>
+            ))
+          : pokemonDetails?.map((poke) => (
+              <tr className="border-b border-gray-100">
+                <td>
+                  <span className="flex items-center gap-2">
+                    <img
+                      src={`https://img.pokemondb.net/sprites/scarlet-violet/icon/${poke.name}.png`}
+                      alt=""
+                      width={60}
+                      height={56}
+                    />
+                    No. {poke.id}
+                  </span>
+                </td>
+                <td>
+                  <Link to={`/pokedex/${poke.name}`} className="font-bold">
+                    {poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}
+                  </Link>
+                </td>
+                <td>
+                  {poke.types.map((type) => (
+                    <>
+                      <PokemonType type={type.type.name} />
+                      <br></br>
+                    </>
+                  ))}
+                </td>
+                {poke.stats.map((stat) => (
+                  <td>{stat.base_stat}</td>
+                ))}
+                <td>
+                  <span className="font-bold">
+                    {poke.stats.reduce((acc, currentValue) => {
+                      return acc + currentValue.base_stat;
+                    }, 0)}
+                  </span>
+                </td>
+              </tr>
             ))}
-            <td>
-              <span className="font-bold">
-                {poke.stats.reduce((acc, currentValue) => {
-                  return acc + currentValue.base_stat;
-                }, 0)}
-              </span>
-            </td>
-          </tr>
-        ))}
       </tbody>
     </table>
   );

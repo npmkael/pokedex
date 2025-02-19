@@ -1,7 +1,8 @@
 import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const PageNotFound = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-white h-screen flex items-center justify-center">
       <div className="flex flex-col w-[50%] items-center justify-center">
@@ -12,13 +13,16 @@ const PageNotFound = () => {
             never existed.
           </p>
         </div>
-        <Link to="/" className="flex items-center font-semibold gap-1 group">
+        <div
+          className="flex items-center font-semibold gap-1 group cursor-pointer"
+          onClick={() => navigate(-1)}
+        >
           <ArrowLeft
             className="group-hover:-translate-x-1 transition-all duration-150"
             size={19}
           />
           Go back
-        </Link>
+        </div>
       </div>
       <div className="w-[50%]">
         <img src="/error-not-found.jpg" alt="" />

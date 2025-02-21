@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import PokemonType from "../../components/pokemon-type";
 import { Link } from "react-router-dom";
-import { Result, PokeAPIResponse } from "../../types/api";
+import { Result, PokeAPIResponse } from "../../types/pokeApi";
 
 type Props = {
   query: string;

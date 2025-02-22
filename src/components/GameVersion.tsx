@@ -10,7 +10,6 @@ type GameVersionProps = {
   versionName: string;
   versionLink: string;
   regionName?: string;
-  key: string;
 };
 
 const GameVersion = ({
@@ -18,7 +17,6 @@ const GameVersion = ({
   versionName,
   versionLink,
   regionName,
-  key,
 }: GameVersionProps) => {
   const [isHovered, setIsHovered] = useState(false);
 

@@ -4,8 +4,25 @@ import GeneralPokemonTable from "./GeneralPokemonTable";
 
 import { useState } from "react";
 
+import { useQuery } from "@tanstack/react-query";
+import { getPokemons } from "../../services/api";
+import { PokeAPIResponse } from "../../types/pokeApi";
+
 const GeneralPokedex = () => {
   const [query, setSearchQuery] = useState("");
+  const { data, isLoading, isError, error } = useQuery<PokeAPIResponse[]>({
+    queryKey: ["data"],
+    queryFn: getPokemons,
+  });
+
+  if (isLoading)
+    return (
+      <div className="h-full flex items-center justify-center">
+        <img src="/pokeball-loading.gif" alt="" />
+      </div>
+    );
+
+  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <div>
@@ -32,7 +49,7 @@ const GeneralPokedex = () => {
 
       {/* Main container */}
       <div className="bg-white w-[80%] mx-auto p-6 border border-gray-100 shadow-con mb-4 shadow-drop-1">
-        <GeneralPokemonTable query={query} />
+        <GeneralPokemonTable query={query} data={data} />
       </div>
     </div>
   );

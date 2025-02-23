@@ -13,7 +13,7 @@ type SortKey = "id" | "name" | null; // Possible filter keys
 type SortOrder = "asc" | "desc"; // Possible sort orders
 
 const GeneralPokemonTable = ({ query, data }: Props) => {
-  const [sortKey, setSortKey] = useState<SortKey>(null);
+  const [sortKey, setSortKey] = useState<SortKey>("id");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
 
   // Filter the data based on the query (case-insenstive)

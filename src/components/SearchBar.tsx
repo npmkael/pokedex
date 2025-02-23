@@ -8,7 +8,7 @@ type Props = {
 
 const SearchBar = ({ query, setSearchQuery }: Props) => {
   return (
-    <div className="py-4 px-8 flex items-center gap-1 bg-white border border-gray-100 focus-within:shadow-drop-3 transition-all duration-200 rounded-3xl">
+    <div className="py-4 px-8 flex-grow flex items-center gap-1 bg-white border border-gray-100 focus-within:shadow-drop-3 transition-all duration-200 rounded-3xl">
       <button>
         <Search className="text-gray-300" />
       </button>
